@@ -6,6 +6,7 @@
 #' We ignore :
 #'
 #' - hidden `.Rproj.user*` files
+#' - git files
 #' - binary files
 #' - files under man/ (we assume they can be rebuilt with roxygen)
 #' - README.md (we assume it can be rebuilt from a README.Rmd)
@@ -23,6 +24,8 @@ flatten_package <- function(dir = ".", file = "") {
   all_files <- list.files(dir, all.files = TRUE, recursive = TRUE)
   # ignore hidden project files
   all_files <- grep("\\.Rproj\\.user", all_files, invert = TRUE, value = TRUE)
+  # ignore git files
+  all_files <- grep("\\.git", all_files, invert = TRUE, value = TRUE)
   # ignore snapshot tests
   all_files <- grep("_snaps/", all_files, invert = TRUE, value = TRUE)
   # ignore binary files
@@ -34,6 +37,7 @@ flatten_package <- function(dir = ".", file = "") {
 
   all_dirs <- list.dirs(dir, recursive = TRUE)
   all_dirs <- grep("\\.Rproj\\.user", all_dirs, invert = TRUE, value = TRUE)
+  all_dirs <- grep("\\.git", all_dirs, invert = TRUE, value = TRUE)
   all_dirs <- setdiff(all_dirs, c(".", "man"))
 
 

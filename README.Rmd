@@ -24,6 +24,7 @@ It has a single function `flat::flatten_package()` that takes a package folder
 We ignore :
 
 - hidden `.Rproj.user*` files
+- git files
 - binary files
 - files under man/ (we assume they can be rebuilt with roxygen)
 - README.md (we assume it can be rebuilt from a README.Rmd)

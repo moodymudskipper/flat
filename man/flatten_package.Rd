@@ -22,6 +22,7 @@ it in the desired folder. {flat} is not needed on the recipient machine.
 We ignore :
 \itemize{
 \item hidden \verb{.Rproj.user*} files
+\item git files
 \item binary files
 \item files under man/ (we assume they can be rebuilt with roxygen)
 \item README.md (we assume it can be rebuilt from a README.Rmd)

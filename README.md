@@ -14,6 +14,7 @@ printing to console).
 We ignore :
 
 - hidden `.Rproj.user*` files
+- git files
 - binary files
 - files under man/ (we assume they can be rebuilt with roxygen)
 - README.md (we assume it can be rebuilt from a README.Rmd)
@@ -34,13 +35,109 @@ devtools::install("moodymudskipper/flat")
 flat::flatten_package()
 #> #### create dirs ---------------------------------------------------------------
 #> 
+#> dir.create("./.git")
+#> dir.create("./.git/hooks")
+#> dir.create("./.git/info")
+#> dir.create("./.git/logs")
+#> dir.create("./.git/logs/refs")
+#> dir.create("./.git/logs/refs/heads")
+#> dir.create("./.git/logs/refs/remotes")
+#> dir.create("./.git/logs/refs/remotes/origin")
+#> dir.create("./.git/objects")
+#> dir.create("./.git/objects/19")
+#> dir.create("./.git/objects/1c")
+#> dir.create("./.git/objects/1d")
+#> dir.create("./.git/objects/32")
+#> dir.create("./.git/objects/42")
+#> dir.create("./.git/objects/44")
+#> dir.create("./.git/objects/46")
+#> dir.create("./.git/objects/58")
+#> dir.create("./.git/objects/68")
+#> dir.create("./.git/objects/69")
+#> dir.create("./.git/objects/83")
+#> dir.create("./.git/objects/8b")
+#> dir.create("./.git/objects/ac")
+#> dir.create("./.git/objects/af")
+#> dir.create("./.git/objects/b6")
+#> dir.create("./.git/objects/c6")
+#> dir.create("./.git/objects/info")
+#> dir.create("./.git/objects/pack")
+#> dir.create("./.git/refs")
+#> dir.create("./.git/refs/heads")
+#> dir.create("./.git/refs/remotes")
+#> dir.create("./.git/refs/remotes/origin")
+#> dir.create("./.git/refs/tags")
 #> dir.create("./man")
 #> dir.create("./R") 
+#>  
+#> #### .git/config ---------------------------------------------------------------
+#> 
+#> writeLines(con = ".git/config", "[core]
+#>  bare = false
+#>  repositoryformatversion = 0
+#>  filemode = true
+#>  ignorecase = true
+#>  precomposeunicode = true
+#>  logallrefupdates = true
+#> [remote \"origin\"]
+#>  url = https://github.com/moodymudskipper/flat.git
+#>  fetch = +refs/heads/*:refs/remotes/origin/*
+#> [branch \"main\"]
+#>  remote = origin
+#>  merge = refs/heads/main")
+#>  
+#> #### .git/description ----------------------------------------------------------
+#> 
+#> writeLines(con = ".git/description", "Unnamed repository; edit this file 'description' to name the repository.")
+#>  
+#> #### .git/HEAD -----------------------------------------------------------------
+#> 
+#> writeLines(con = ".git/HEAD", "ref: refs/heads/main")
+#>  
+#> #### .git/hooks/README.sample --------------------------------------------------
+#> 
+#> writeLines(con = ".git/hooks/README.sample", "#!/bin/sh
+#> #
+#> # Place appropriately named executable hook scripts into this directory
+#> # to intercept various actions that git takes.  See `git help hooks` for
+#> # more information.")
+#>  
+#> #### .git/info/exclude ---------------------------------------------------------
+#> 
+#> writeLines(con = ".git/info/exclude", "# File patterns to ignore; see `git help ignore` for more information.
+#> # Lines that start with '#' are comments.")
+#>  
+#> #### .git/logs/HEAD ------------------------------------------------------------
+#> 
+#> writeLines(con = ".git/logs/HEAD", "0000000000000000000000000000000000000000 8b5504804a515f941793b3433ad2fd1ee472a455 Antoine Fabri <antoine.fabri@gmail.com> 1687265521 +0200   commit (initial): Initial commit
+#> 8b5504804a515f941793b3433ad2fd1ee472a455 1d10aa0955931970c9e23cc2e3f03c8b8e761f19 Antoine Fabri <antoine.fabri@gmail.com> 1687265563 +0200   commit: Add GitHub links to DESCRIPTION")
+#>  
+#> #### .git/logs/refs/heads/main -------------------------------------------------
+#> 
+#> writeLines(con = ".git/logs/refs/heads/main", "0000000000000000000000000000000000000000 8b5504804a515f941793b3433ad2fd1ee472a455 Antoine Fabri <antoine.fabri@gmail.com> 1687265521 +0200    commit (initial): Initial commit
+#> 8b5504804a515f941793b3433ad2fd1ee472a455 1d10aa0955931970c9e23cc2e3f03c8b8e761f19 Antoine Fabri <antoine.fabri@gmail.com> 1687265563 +0200   commit: Add GitHub links to DESCRIPTION")
+#>  
+#> #### .git/logs/refs/remotes/origin/main ----------------------------------------
+#> 
+#> writeLines(con = ".git/logs/refs/remotes/origin/main", "0000000000000000000000000000000000000000 1d10aa0955931970c9e23cc2e3f03c8b8e761f19 Antoine Fabri <antoine.fabri@gmail.com> 1687265564 +0200   update by push")
+#>  
+#> #### .git/refs/heads/main ------------------------------------------------------
+#> 
+#> writeLines(con = ".git/refs/heads/main", "1d10aa0955931970c9e23cc2e3f03c8b8e761f19")
+#>  
+#> #### .git/refs/remotes/origin/main ---------------------------------------------
+#> 
+#> writeLines(con = ".git/refs/remotes/origin/main", "1d10aa0955931970c9e23cc2e3f03c8b8e761f19")
 #>  
 #> #### .gitignore ----------------------------------------------------------------
 #> 
 #> writeLines(con = ".gitignore", ".Rproj.user
-#> inst/doc")
+#> inst/doc
+#> .Rhistory
+#> .Rdata
+#> .httr-oauth
+#> .DS_Store
+#> .quarto")
 #>  
 #> #### .Rbuildignore -------------------------------------------------------------
 #> 
@@ -64,7 +161,9 @@ flat::flatten_package()
 #> Suggests: 
 #>     knitr,
 #>     rmarkdown
-#> VignetteBuilder: knitr")
+#> VignetteBuilder: knitr
+#> URL: https://github.com/moodymudskipper/flat
+#> BugReports: https://github.com/moodymudskipper/flat/issues")
 #>  
 #> #### flat.Rproj ----------------------------------------------------------------
 #> 
@@ -136,6 +235,7 @@ flat::flatten_package()
 #> #' We ignore :
 #> #'
 #> #' - hidden `.Rproj.user*` files
+#> #' - git files
 #> #' - binary files
 #> #' - files under man/ (we assume they can be rebuilt with roxygen)
 #> #' - README.md (we assume it can be rebuilt from a README.Rmd)
@@ -153,6 +253,8 @@ flat::flatten_package()
 #>   all_files <- list.files(dir, all.files = TRUE, recursive = TRUE)
 #>   # ignore hidden project files
 #>   all_files <- grep(\"\\\\.Rproj\\\\.user\", all_files, invert = TRUE, value = TRUE)
+#>   # ignore git files
+#>   all_files <- grep(\"\\\\.git\", all_files, invert = TRUE, value = TRUE)
 #>   # ignore snapshot tests
 #>   all_files <- grep(\"_snaps/\", all_files, invert = TRUE, value = TRUE)
 #>   # ignore binary files
@@ -164,6 +266,7 @@ flat::flatten_package()
 #> 
 #>   all_dirs <- list.dirs(dir, recursive = TRUE)
 #>   all_dirs <- grep(\"\\\\.Rproj\\\\.user\", all_dirs, invert = TRUE, value = TRUE)
+#>   all_dirs <- grep(\"\\\\.git\", all_dirs, invert = TRUE, value = TRUE)
 #>   all_dirs <- setdiff(all_dirs, c(\".\", \"man\"))
 #> 
 #> 
@@ -222,6 +325,7 @@ flat::flatten_package()
 #> We ignore :
 #> 
 #> - hidden `.Rproj.user*` files
+#> - git files
 #> - binary files
 #> - files under man/ (we assume they can be rebuilt with roxygen)
 #> - README.md (we assume it can be rebuilt from a README.Rmd)
