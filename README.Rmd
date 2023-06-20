@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# flat
+
+{flat} makes your package into a script you can source to recreate it, this allows you to
+email a flat file when emailing a compressed file is problematic.
+
+It has a single function `flat::flatten_package()` that takes a package folder
+(defaults to current folder) and an output file (defaults to printing to console).
+
+{flat} is not needed on the recipient machine.
+
+We ignore :
+
+- hidden `.Rproj.user*` files
+- binary files
+- files under man/ (we assume they can be rebuilt with roxygen)
+- README.md (we assume it can be rebuilt from a README.Rmd)
+- .Rhistory
+- testthat snapshots
+
+## Installation
+
+Install with:
+
+``` r
+devtools::install("moodymudskipper/flat")
+```
+
+## Example
+
+```{r}
+flat::flatten_package()
+```
+
