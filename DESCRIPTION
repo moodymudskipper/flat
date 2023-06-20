@@ -12,3 +12,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/moodymudskipper/flat
+BugReports: https://github.com/moodymudskipper/flat/issues
